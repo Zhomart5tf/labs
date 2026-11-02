@@ -1,0 +1,52 @@
+Building the Virtual Machine Environment
+
+1. Introduction
+
+For this task, I used VMware Workstation to work with two virtual machines: Windows and Linux. I checked their settings, network configuration, and connectivity. I also created a snapshot to save the current state of the virtual machine.
+
+2. Windows Virtual Machine
+
+First, I opened VMware Workstation and selected my Windows virtual machine. I went to the virtual machine settings and checked the hardware configuration.
+
+I opened the Network Adapter section and confirmed that the network mode was set to NAT. After checking the settings, I started the Windows virtual machine and waited for the system to load.
+
+3. Linux Virtual Machine
+
+Next, I selected my Linux virtual machine in VMware Workstation. I checked its hardware and network settings and confirmed that NAT was selected for the network adapter.
+
+After starting Linux, I opened the terminal and ran the following command to get information about the system:
+
+uname -a
+
+I saved the command output in a text file named 04-guest-uname.txt.
+
+4. Network Connectivity Test
+
+To check the connection between the two virtual machines, I used the hostname -I command in Linux to find its IP address. In Windows, I used ipconfig to check the network configuration.
+
+Then, I ran a ping command from Windows to the Linux virtual machine:
+
+ping -n 4 <Linux-IP-address>
+
+I saved the output in 05-ping-between-guests.txt so that the connectivity test could be documented.
+
+The result of the test should reflect the actual output, including any timeouts or lost packets.
+
+5. Snapshot
+
+I opened the snapshot options in VMware Workstation and created a snapshot named Initial-Configuration. This snapshot saves the current state of the virtual machine and can be useful if I need to return to that state later.
+
+I then opened Snapshot Manager and saved a screenshot showing the snapshot list.
+
+6. Evidence Files
+
+I prepared the evidence files required for the assignment and organized them in the evidence folder.
+
+* 01-new-vm-wizard.png — virtual machine creation wizard.
+* 02-disk-settings.png — virtual disk settings.
+* 03-network-adapter.png — network adapter configuration.
+* 04-guest-uname.txt — Linux system information.
+* 05-ping-between-guests.txt — output of the connectivity test.
+* 06-snapshot-list.png — snapshot list in VMware Workstation.
+
+These files document the configuration steps and the checks performed during the task.
