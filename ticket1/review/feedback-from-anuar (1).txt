@@ -1,0 +1,19 @@
+Feedback on Zhomart's BUILD.md
+Reviewer: Kiyabaev Anuar
+Commit reviewed: https://github.com/Zhomart5tf/labs/tree/main/ticket1
+Hypervisor I used: VMware Workstation Pro, version 17
+
+## First step where I got stuck
+Step number: Step 3 & 4
+What the step says: "After starting Linux, I opened the terminal and ran the following command to get information about the system: uname -a. I saved the command output in a text file named 04-guest-uname.txt."
+What I did: Started the Linux virtual machine, opened the terminal, and ran `uname -a`.
+What happened / what I had to guess: The instruction doesn't specify which directory to save the text file in or how to redirect the output (whether to use a command like `uname -a > 04-guest-uname.txt` or create it manually via text editor). Also, on Step 4, `hostname -I` was mentioned, but no path or explicit redirection command was provided for `05-ping-between-guests.txt`.
+
+## Other places I hesitated
+- Step 1: Said to "check the hardware configuration" and "check the network mode was set to NAT", but didn't specify recommended RAM size, CPU cores, or exact virtual network mapping (e.g., VMnet8).
+
+## Settings I would not have chosen without the document
+- Using NAT mode for both Windows and Linux network adapters specifically as outlined for this workflow.
+
+## One thing that worked well
+- The overall logical flow of the document (starting with Windows, moving to Linux, testing network connectivity with ping, and ending with snapshots) is very clear and easy to follow step-by-step.
