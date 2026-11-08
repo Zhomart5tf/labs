@@ -1,0 +1,2 @@
+$ sha256sum /mnt/raid/testfile.txt
+bc074428af64fe8167ab2dd7a47ec4822784381b3a79a62cc1aebd932a3c7a35  /mnt/raid/testfile.txt
