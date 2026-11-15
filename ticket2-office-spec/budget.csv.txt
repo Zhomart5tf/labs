@@ -1,0 +1,30 @@
+role,component,model,price KZT,source,date
+accountant,CPU,Intel Core i3 12100 LGA1700 OEM,64800,https://shop.kz/offer/protsessor-intel-core-i3-12100-lga1700-oem/,15.11.2026
+accountant,Motherboard,ASUS Prime H610M-F D4 R2.0 LGA1700,33990,https://shop.kz/offer/materinskaya-plata-asus-prime-h610m-f-d4-r2-0-lga1700/,15.11.2026
+accountant,RAM 16GB,Team Group Elite DDR4 16GB 3200MHz 2x8GB Kit,76990,https://shop.kz/offer/ddr-4-dimm-16-gb-3200-mhz-team-group-elite-2x-8-gb-kit-box-ted416g3200c22dc01/,15.11.2026
+accountant,SSD 1TB,MSI Spatium M470 Pro 1TB M.2 PCIe 4.0,96990,https://shop.kz/offer/ssd-nakopitel-1-tb-msi-spatium-m470-pro-m-2-pcie-4-0/,15.11.2026
+accountant,Case,X-Game Cube Black,13690,https://shop.kz/offer/korpus-x-game-cube-black/,15.11.2026
+accountant,Monitor,iiyama ProLite XU2493HSU-B7 24 inch,65990,https://shop.kz/offer/monitor-24-iiyama-prolite-xu2493hsu-b7-black/,15.11.2026
+accountant,Windows 11 Pro,Microsoft Windows 11 Professional 64-bit USB,123990,https://shop.kz/offer/microsoft-windows-11-professional-64-bit-usb/,15.11.2026
+sales,CPU,AMD Ryzen 5 7500F AM5 OEM,69990,https://shop.kz/offer/protsessor-amd-ryzen-5-7500f-am5-oem/,15.11.2026
+sales,Motherboard,MSI PRO B840M-B AM5,50590,https://shop.kz/offer/materinskaya-plata-msi-pro-b840m-b-am5/,15.11.2026
+sales,RAM 32GB,AMD Radeon R9 Gamer DDR4 32GB 3200MHz 2x16GB Kit,152990,https://shop.kz/offer/ddr-4-dimm-32-gb-3200-mhz-amd-radeon-r9-gamer-2x-16-gb-kit-box-r9s432g3206u2k/,15.11.2026
+sales,SSD 1TB,MSI Spatium M470 Pro 1TB M.2 PCIe 4.0,96990,https://shop.kz/offer/ssd-nakopitel-1-tb-msi-spatium-m470-pro-m-2-pcie-4-0/,15.11.2026
+sales,Case,Wintek Magic L204-B-M TG Black,15990,https://shop.kz/offer/korpus-wintek-magic-l204-b-m-tg-black/,15.11.2026
+sales,Monitor,Xiaomi G27Qi 2026 27 inch,99990,https://shop.kz/offer/monitor-27-xiaomi-g27qi-2026-black/,15.11.2026
+sales,Windows 11 Home,Microsoft Windows 11 Home 64-bit USB,82990,https://shop.kz/offer/microsoft-windows-11-home-64-bit-usb/,15.11.2026
+web developer,CPU,AMD Ryzen 7 9700X AM5 OEM,132990,https://shop.kz/offer/protsessor-amd-ryzen-7-9700x-am5-oem/,15.11.2026
+web developer,Motherboard,MSI MAG B650 Tomahawk WiFi AM5,113590,https://shop.kz/offer/materinskaya-plata-msi-mag-b650-tomahawk-wifi-am5/,15.11.2026
+web developer,RAM 32GB,Kingston FURY Beast KF432C16BB1K2/32 DDR4 32GB 2x16GB 3200MHz,241800,https://shop.kz/offer/komplekt-moduley-pamyati-kingston-fury-beast-kf432c16bb1k2-32-ddr4-32gb-kit-2x16gb-3200mhz/,15.11.2026
+web developer,SSD 1TB,MSI Spatium M470 Pro 1TB M.2 PCIe 4.0,96990,https://shop.kz/offer/ssd-nakopitel-1-tb-msi-spatium-m470-pro-m-2-pcie-4-0/,15.11.2026
+web developer,Case,Cougar Airface 180 Black,30990,https://shop.kz/offer/korpus-cougar-airface-180-black/,15.11.2026
+web developer,Monitor,MSI MAG 275QF 27 inch,108990,https://shop.kz/offer/monitor-27-msi-mag-275qf-black/,15.11.2026
+web developer,Windows 11 Home,Microsoft Windows 11 Home 64-bit USB,82990,https://shop.kz/offer/microsoft-windows-11-home-64-bit-usb/,15.11.2026
+designer,CPU,AMD Ryzen 7 9700X AM5 OEM,132990,https://shop.kz/offer/protsessor-amd-ryzen-7-9700x-am5-oem/,15.11.2026
+designer,Motherboard,MSI MAG B650 Tomahawk WiFi AM5,113590,https://shop.kz/offer/materinskaya-plata-msi-mag-b650-tomahawk-wifi-am5/,15.11.2026
+designer,RAM 32GB,Kingston FURY Beast KF432C16BB1K2/32 DDR4 32GB 2x16GB 3200MHz,241800,https://shop.kz/offer/komplekt-moduley-pamyati-kingston-fury-beast-kf432c16bb1k2-32-ddr4-32gb-kit-2x16gb-3200mhz/,15.11.2026
+designer,SSD 1TB,MSI Spatium M470 Pro 1TB M.2 PCIe 4.0,96990,https://shop.kz/offer/ssd-nakopitel-1-tb-msi-spatium-m470-pro-m-2-pcie-4-0/,15.11.2026
+designer,GPU,Gainward RTX 4060 Ti Pegasus 8GB,259990,https://shop.kz/offer/videokarta-gainward-rtx-4060-ti-pegasus-8-gb-geforce-rtx-4060-ti/,15.11.2026
+designer,PSU,PCCooler KF650 ATX 650W,21590,https://shop.kz/offer/blok-pitaniya-atx-650-w-pccooler-kf650/,15.11.2026
+designer,Windows 11 Home,Microsoft Windows 11 Home 64-bit USB,82990,https://shop.kz/offer/microsoft-windows-11-home-64-bit-usb/,15.11.2026
+designer,Monitor,MSI MAG 275QF 27 inch,108990,https://shop.kz/offer/monitor-27-msi-mag-275qf-black/,15.11.2026

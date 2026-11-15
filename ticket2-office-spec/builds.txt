@@ -1,0 +1,41 @@
+# Builds
+
+### Build 1 — accountant
+
+**Load:** large Excel files, 1C accounting software, a browser, 10–15 windows open at once.
+
+**Bottleneck:** SSD speed and memory. A large Excel file is opened and recalculated from disk, and with 16 GB and 15 windows the memory is almost full.
+
+**Trade-off:** Core i3 and integrated graphics, no graphics card. The money went to a 1 TB NVMe SSD and 16 GB of RAM.
+
+**Total:** <total> KZT (budget.csv, rows 2–8)
+
+### Build 2 — sales manager
+
+**Load:** CRM in a browser, 30–40 tabs, Excel, four hours of video calls a day, sometimes all at once.
+
+**Bottleneck:** memory, not CPU. Chrome with forty tabs plus a video call is around 11–12 GB. On 8 GB the machine starts swapping in the middle of a customer call.
+
+**Trade-off:** took a Ryzen 5 instead of a Ryzen 7 and spent the saved money on 32 GB instead of 16 GB. The CPU idles in this role; the memory does not.
+
+**Total:** <total> KZT (budget.csv, rows 9–15)
+
+### Build 3 — web developer
+
+**Load:** IDE, Docker containers, a browser with documentation, a virtual machine.
+
+**Bottleneck:** memory and CPU core count. Docker and a virtual machine together take 12–16 GB, and project builds load all CPU cores.
+
+**Trade-off:** Ryzen 7 and 32 GB of RAM, no dedicated graphics card, because a developer barely uses a GPU.
+
+**Total:** <total> KZT (budget.csv, rows 16–22)
+
+### Build 4 — designer
+
+**Load:** Photoshop, Figma, large PSD files, colour-critical work.
+
+**Bottleneck:** graphics card, memory and monitor colour accuracy. A large PSD with dozens of layers takes a lot of RAM, filters run on the GPU, and an inaccurate monitor gives wrong colours.
+
+**Trade-off:** more money went to the RTX 4060 and an sRGB 99% monitor; the CPU is mid-range.
+
+**Total:** <2 913 240> KZT (budget.csv, rows 23–30)
