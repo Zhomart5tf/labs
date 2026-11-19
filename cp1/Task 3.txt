@@ -1,0 +1,59 @@
+Task 3: Diagnose
+
+## Transcript
+
+| # | Evidence file (command) | What I expected | What I found | What I concluded |
+|---|---|---|---|---|
+| 1 | 00-README | list of files and commands | 22 files, collected Mon 16 Nov 09:42 UTC over SSH as aigerim | read in order: services first, then files |
+| 2 | 05 (systemctl --failed) | nightly-report failing | two failed units: legacy-sync and nightly-report | two leads; check which one belongs to the ticket |
+| 3 | 06 (systemctl list-timers) | timer firing every 2 minutes, as the ticket says | nightly-report.timer: last 09:42:01, next 09:44:01 | scheduler is fine; the fault is in what the timer starts, not in the timer |
+| 4 | 07 (systemctl status nightly-report.service) | the reason for the failure | `status=203/EXEC`, "Failed to execute /usr/local/bin/nightly-report.sh: No such file or directory" | systemd could not start the program at all (203 = exec failed, not a script error); lead: is the file missing? |
+| 5 | 13 (ls -l /usr/local/bin) | file missing or wrong name | `-rwxr-xr-x root root 91 Nov 9 14:20 nightly-report.sh` | file exists and is executable, so "No such file" is not literal; permissions ruled out; the date Nov 9 14:20 matches "script updated" |
+| 6 | 08 (systemctl cat) | typo in the path | ExecStart=/usr/local/bin/nightly-report.sh, same path as the file; Type=oneshot; timer OnUnitActiveSec=2min | unit and timer files are correct; typo ruled out |
+| 7 | 09 (journalctl -u nightly-report.service) | when it started failing | success every 2 min until Nov 09 14:18:01; first failure Nov 09 14:20:01; same failure since | the change happened between 14:18 and 14:20 on Nov 9, the same minute as the script's modification time |
+| 8 | 15, 14 (tail log, ls -l /var/log) | log still being written | last entry Nov 9 14:18:01; log is `-rw-r--r-- root`, modified Nov 9 14:18 | log is writable and stopped exactly when the failures began; the script has not run since |
+| 9 | 10, 11 (legacy-sync status and journal) | maybe related | ExecStart=/bin/false, "no longer used", fails at every boot since Sep 14 | **dead end**: unrelated to the ticket, failing for weeks before the problem |
+| 10 | 03, 04 (df -h, free -h) | full disk or no memory | `/` 48% used, 5.8G free; 1.5Gi memory available | **dead end**: not disk or memory |
+| 11 | 21, 22 (apt history, bash history) | what changed on Nov 9 | full-upgrade (bash, systemd) 09:38–09:41, reboot; later `cp ~/nightly-report.sh /usr/local/bin/`, `chmod +x`, start, `chmod 755`, start | **dead end**: the upgrade is not the cause (job succeeded for 5 more hours after it); the cp is the change; chmod was tried twice and did not help, which confirms it is not permissions |
+| 12 | 16 (cat nightly-report.sh) | typo or wrong command | 3 normal lines, `#!/bin/bash` first | content looks correct, but "file not found" with an existing file and good content points to something invisible |
+| 13 | 19 (run by hand) | script runs | `cannot execute: required file not found`, also with sudo | fault reproduces without systemd, so systemd is not at fault; this message is what the shell prints when the shebang interpreter is missing |
+| 14 | 20 (ls -l /bin/bash) | /bin/bash missing | `-rwxr-xr-x root root /bin/bash` exists | interpreter exists, so the shebang must contain something extra |
+| 15 | 17 (cat -A) | normal line endings | every line ends with `^M$` | the script has Windows (CRLF) line endings |
+| 16 | 18 (head -1 \| od -c) | `#!/bin/bash\n` | `#!/bin/bash\r\n` | the kernel looks for the interpreter `/bin/bash\r`, which does not exist, so the error is ENOENT, shown as "No such file or directory" |
+| 17 | not in pack: `file /usr/local/bin/nightly-report.sh` | would confirm | expect "...script, ASCII text executable, with CRLF line terminators" | extra confirmation of CRLF |
+
+## Root cause
+`/usr/local/bin/nightly-report.sh` was copied from `~/nightly-report.sh` on Nov 9 14:20 with Windows CRLF line endings, so the shebang is `#!/bin/bash\r` and the kernel cannot find that interpreter. Proof: files 17 and 18 (`^M$`, `\r\n`), 19 (cannot run even by hand) and 09 (success before 14:20, failure after).
+
+## Fix
+```bash
+sudo sed -i 's/\r$//' /usr/local/bin/nightly-report.sh
+file /usr/local/bin/nightly-report.sh
+sudo systemctl reset-failed nightly-report.service
+sudo systemctl start nightly-report.service
+```
+The change is in the file on disk, so it survives a reboot. (Alternative: `sudo apt install dos2unix && sudo dos2unix /usr/local/bin/nightly-report.sh`.)
+
+## Verification
+| Command | Expected output |
+|---|---|
+| `file /usr/local/bin/nightly-report.sh` | `Bourne-Again shell script, ASCII text executable` (no "with CRLF line terminators") |
+| `head -1 /usr/local/bin/nightly-report.sh \| od -c` | `#   !   /   b   i   n   /   b   a   s   h  \n` |
+| `sudo /usr/local/bin/nightly-report.sh; echo $?` | no error, `0` |
+| `systemctl status nightly-report.service` | `status=0/SUCCESS`, "Finished Nightly report" |
+| `tail -n 6 /var/log/nightly-report.log` | a new `date` line with the current time, then the `df` and `free` output |
+| `systemctl --failed` | only `legacy-sync.service` left; nightly-report is gone |
+| wait 2 minutes, `ls -l /var/log/nightly-report.log` | modification time moved forward, size grew |
+
+After reboot:
+
+| Command | Expected output |
+|---|---|
+| `systemctl is-enabled nightly-report.timer` | `enabled` (if not: `sudo systemctl enable --now nightly-report.timer`) |
+| `sudo reboot`, log in again | |
+| `uptime` | up a few minutes |
+| `systemctl list-timers \| grep nightly` | timer active, NEXT within 2 minutes |
+| `tail -n 6 /var/log/nightly-report.log` | entries dated after the reboot |
+| `journalctl -u nightly-report.service -b --no-pager \| tail` | "Finished Nightly report", no 203/EXEC |
+
+Note: `legacy-sync.service` is a separate old problem (`ExecStart=/bin/false`) and is not related to the ticket.

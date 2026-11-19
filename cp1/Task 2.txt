@@ -1,0 +1,65 @@
+# Checkpoint 1 — Task 2
+
+## Allocation 
+
+| | Ubuntu Server | Windows 11 |
+|---|---|---|
+| vCPUs | 1 | 2 |
+| Memory | 2 GB | 4 GB |
+| Disk | 20 GB, dynamically allocated | 64 GB, dynamically allocated |
+| Network | 1 adapter, NAT | 1 adapter, NAT |
+
+## Arithmetic
+
+Figures from Task 1: <AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx> logical processors, <475.95> GB RAM, <300> GB free on C:.
+Assumption: the host (Windows + VMware) needs 2 threads, 4 GB RAM, 30 GB disk.
+
+| Resource | Host has | Guests use | Left for host | Host needs | OK? |
+|---|---|---|---|---|---|
+| CPU | < AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx> | 1 + 2 = 3 | <T-3> | 2 | <yes/no> |
+| RAM | < 475.95> GB | 2 + 4 = 6 GB | <R-6> GB | 4 GB | <yes/no> |
+| Disk | <300> GB | 20 + 64 = 84 GB (maximum) | <D-84> GB | 30 GB | <yes/no> |
+
+Conclusion: <this computer can run both guests / cannot run both guests because ...>.
+
+## Justification
+
+- Network, Ubuntu: NAT. The guest reaches the internet through the host, and the host reaches the guest by its NAT address (VMnet8), so ssh works. Bridged would also work, but the VM would appear on the office network with its own address and be reachable by other computers, which a test lab does not need. Host-only has no internet.
+- Network, Windows: NAT, for the same reason; it only needs the internet.
+- Disk, dynamically allocated: it uses only the space really written, so the host keeps free space. Fixed disk is slightly faster but takes the full size at once, which this computer cannot afford.
+- Ubuntu 1 vCPU / 2 GB / 20 GB: Ubuntu Server needs little; this is above its minimum (1 GB RAM, 5 GB disk).
+- Windows 11 2 vCPU / 4 GB / 64 GB: this is exactly the Windows 11 minimum (2 cores, 4 GB RAM, 64 GB disk). Nothing is set below a minimum.
+- 2 threads and 4 GB are kept for the host so it stays usable.
+
+## If both guests cannot run 
+Proof: <the row from the table above that is "no">.
+Closest working configuration: <e.g. Ubuntu 1 vCPU / 1 GB / 10 GB + Windows 11 2 vCPU / 4 GB / 64 GB, not running at the same time; or only one guest at a time>.
+What it gives up: <e.g. both guests at the same time / host responsiveness>.
+
+## Verification plan
+
+Ubuntu guest:
+
+| Command | Expected output |
+|---|---|
+| `nproc` | `1` |
+| `free -h` | `Mem:` total about `1.9Gi` |
+| `lsblk -d -o NAME,SIZE` | `sda  20G` |
+| `ip -br a` | interface `ens33` with an address like `192.168.x.x/24` |
+| `ping -c 2 8.8.8.8` | `2 packets transmitted, 2 received, 0% packet loss` |
+| `ping -c 2 google.com` | replies from google.com (shows DNS works) |
+
+Host (PowerShell):
+
+| Command | Expected output |
+|---|---|
+| `Test-NetConnection <ubuntu-ip> -Port 22` | `TcpTestSucceeded : True` |
+| `ssh <Zhomart>@<ubuntu-ip>` | password prompt, then the Ubuntu shell prompt |
+
+Windows 11 guest (PowerShell):
+
+| Command | Expected output |
+|---|---|
+| `Get-CimInstance Win32_ComputerSystem \| Select NumberOfLogicalProcessors,TotalPhysicalMemory` | `2` and about `4294967296` (4 GB) |
+| `Get-Volume -DriveLetter C \| Select Size` | about `68719476736` (64 GB) |
+| `ping 8.8.8.8` | `Reply from 8.8.8.8`, 0% loss |

@@ -1,0 +1,140 @@
+﻿=== CPU: Get-CimInstance Win32_Processor ===
+
+
+Name                                    : AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx  
+NumberOfCores                           : 4
+NumberOfLogicalProcessors               : 8
+VirtualizationFirmwareEnabled           : True
+SecondLevelAddressTranslationExtensions : True
+
+
+
+=== Hypervisor: Get-CimInstance Win32_ComputerSystem ===
+
+
+HypervisorPresent : False
+
+
+
+=== systeminfo ===
+
+Имя узла:                                DESKTOP-JOGB8H3
+Имя ОС:                                  Майкрософт Windows 11 Pro
+Версия ОС:                               10.0.26200 Н/Д построение 26200
+Изготовитель ОС:                         Microsoft Corporation
+Конфигурация ОС:                         Изолированная рабочая станция
+Тип сборки ОС:                           Multiprocessor Free
+Зарегистрированный владелец:             ZHOMART
+Зарегистрированная организация:          
+Код продукта:                            00330-80000-00000-AA373
+Дата исходной установки:                 22.07.2025, 16:50:53
+Время загрузки системы:                  19.11.2026, 10:30:36
+Изготовитель системы:                    Acer
+Модель системы:                          Nitro AN515-43
+Тип системы:                             x64-based PC
+Процессоры:                              Число процессоров - 1.
+                                         [01]: AMD64 Family 23 Model 24 Stepping 1 AuthenticAMD ~2100 МГц
+Версия BIOS:                             Insyde Corp. V1.12, 05.11.2020
+Каталог Windows:                         C:\Windows
+Системный каталог:                       C:\Windows\system32
+Устройство загрузки:                     \Device\HarddiskVolume1
+Язык системы:                            ru;Русский
+Язык ввода:                              ru;Русский
+Часовой пояс:                            (UTC+05:00) Астана
+Полный объем физической памяти:          6 083 МБ
+Доступная физическая память:             1 672 МБ
+Виртуальная память: максимальный размер: 8 643 МБ
+Виртуальная память: доступна:            2 461 МБ
+Виртуальная память: используется:        6 182 МБ
+Расположение файла подкачки:             C:\pagefile.sys
+Домен:                                   WORKGROUP
+Сервер для входа:                        \\DESKTOP-JOGB8H3
+Исправления:                             Число установленных исправлений - 5.
+                                         [01]: KB5127690
+                                         [02]: KB5054156
+                                         [03]: KB5132061
+                                         [04]: KB5127647
+                                         [05]: KB5132688
+Сетевые адаптеры:                        Число сетевых адаптеров - 5.
+                                         [01]: Realtek Gaming GbE Family Controller
+                                               Имя подключения: Ethernet
+                                               Состояние:       Носитель отключен
+                                         [02]: Bluetooth Device (Personal Area Network)
+                                               Имя подключения: Сетевое подключение Bluetooth
+                                               Состояние:       Носитель отключен
+                                         [03]: Qualcomm Atheros QCA61x4A Wireless Network Adapter
+                                               Имя подключения: Беспроводная сеть
+                                               DHCP включен:    Да
+                                               DHCP-сервер:     172.20.10.1
+                                               IP-адрес
+                                               [01]: 172.20.10.2
+                                               [02]: fe80::fab9:12a3:8054:7625
+                                               [03]: 2a0d:b201:1010:3efa:55e8:3449:8e50:370d
+                                               [04]: 2a0d:b201:1010:3efa:8796:ed82:39b1:8c4e
+                                         [04]: VMware Virtual Ethernet Adapter for VMnet1
+                                               Имя подключения: VMware Network Adapter VMnet1
+                                               DHCP включен:    Да
+                                               DHCP-сервер:     192.168.217.254
+                                               IP-адрес
+                                               [01]: 192.168.217.1
+                                               [02]: fe80::e776:4914:f0c2:c1eb
+                                         [05]: VMware Virtual Ethernet Adapter for VMnet8
+                                               Имя подключения: VMware Network Adapter VMnet8
+                                               DHCP включен:    Да
+                                               DHCP-сервер:     192.168.134.254
+                                               IP-адрес
+                                               [01]: 192.168.134.1
+                                               [02]: fe80::14bf:bd56:abb9:6ee6
+Безопасность на основе виртуализации:    Состояние: Не включено
+                                         App Control for Business policy: Применено
+                                         App Control for Business user mode policy: Выкл.
+                                         Функции безопасности включены:
+Требования Hyper-V:                      Расширения режима мониторинга виртуальной машины: Да
+                                         Виртуализация включена во встроенном ПО: Да
+                                         Преобразование адресов второго уровня: Да
+                                         Доступно предотвращение выполнения данных: Да
+=== Memory (KB): Get-CimInstance Win32_OperatingSystem ===
+
+
+TotalVisibleMemorySize : 6228620
+FreePhysicalMemory     : 1715124
+
+
+
+=== Disk type: Get-PhysicalDisk ===
+
+
+FriendlyName : HFM512GDJTNG-8310A
+MediaType    : SSD
+Size         : 512110190592
+
+
+
+=== Size and free space: Get-Volume C ===
+
+
+DriveLetter   : C
+Size          : 511043432448
+SizeRemaining : 322971066368
+
+
+
+=== Partition style: Get-Disk ===
+
+
+Number         : 0
+FriendlyName   : HFM512GDJTNG-8310A
+PartitionStyle : GPT
+Size           : 512110190592
+
+
+
+=== OS: Get-CimInstance Win32_OperatingSystem ===
+
+
+Caption     : Майкрософт Windows 11 Pro
+Version     : 10.0.26200
+BuildNumber : 26200
+
+
+
